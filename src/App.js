@@ -1,9 +1,12 @@
 import React from 'react'
 import './App.css'
-import { createStore} from 'redux'
+import { createStore, applyMiddleware } from 'redux'
+import { Provider } from 'react-redux'
+import thunk from 'redux-thunk'
+import rootReducer from './reducers'
 import Home from './components/home'
 
-const store = createStore(rootReducer)
+const store = createStore(rootReducer, applyMiddleware(thunk))
 
 function App() {
   return (
