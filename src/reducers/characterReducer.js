@@ -1,6 +1,6 @@
 import { CHARACTER_SUCCESS, CHARACTER_ERROR } from '../actions'
 
-export const characteReducer = (state = null, { type, payload }) => {
+export const characterReducer = (state = "", { type, payload }) => {
 	switch(type) {
 		case CHARACTER_SUCCESS: 
 			return payload.data
