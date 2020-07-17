@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import Title from './title'
 import { loadCharacter } from '../actions'
+import CharactersDisplay from '../components/charactersDisplay.js'
+import Character from '../components/character.js'
 
 function Starwars(){
     const dispatch = useDispatch()
@@ -12,6 +13,7 @@ function Starwars(){
 
     return(
         <div>
+        <div className="forms">
             <form
                 onSubmit={event => {
                     event.preventDefault()
@@ -31,20 +33,36 @@ function Starwars(){
                 onSubmit={event => {
                     event.preventDefault()
 
-                    let characterObject = {
-                        name: data.name,
-                        height: data.height,
-                        mass: data.mass,
-                        hairColor: data.hair_color,
-                        eyeColor: data.eyeColor,
-                    }
-                    const list = [...characterList, characterObject];
+                    let character = <Character name={data.name} 
+                        height={data.height} 
+                        mass={data.mass} 
+                        hairColor={data.hair_color} 
+                        eyeColor={data.eye_color} 
+
+                    />
+                    
+                    const list = [...characterList, character];
                     setList(list)
                 }}
             >
                 <button name="save" type="submit">Save</button>
             </form>
-            <Title title={data.name}/>
+            
+        </div>
+
+        {data &&
+            <div>
+                <Character name={data.name} 
+                        height={data.height} 
+                        mass={data.mass} 
+                        hairColor={data.hair_color} 
+                        eyeColor={data.eye_color} 
+                    />
+            </div>
+        }
+
+        <CharactersDisplay characterList={characterList} />
+
         </div>
     )
 }
